@@ -2,11 +2,11 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.stream.IntStream;
 
-public class Side {
+public class RubikSide {
     private int size;
     private int[][] values;
 
-    public Side (int size, int color){
+    public RubikSide (int size, int color){
         this.size = size;
         int[] dimension = IntStream.generate(() -> color).limit(size).toArray();
         values = IntStream.range(0, size)
@@ -52,7 +52,7 @@ public class Side {
         return res;
     }
 
-    public void rotateFace(){
+    public void rotateFaceACW(){
         int[] row1 = getRow(0);
         int[] row2 = getRow(size-1);
         int[] col1 = getCol(0);
@@ -62,5 +62,18 @@ public class Side {
         setCol(0, reverse(row1));
         setCol(size-1, reverse(row2));
     }
+    public void rotateFaceCW(){
+        int[] row1 = getRow(0);
+        int[] row2 = getRow(size-1);
+        int[] col1 = getCol(0);
+        int[] col2 = getCol(size-1);
+        setRow(0, reverse(col1));
+        setRow(size-1, reverse(col2));
+        setCol(0, row2);
+        setCol(size-1, row1);
+    }
+
+
+    
 }
 
