@@ -28,6 +28,9 @@ public class RubikSide {
     public int[] getRow(int row){
         return values[row];
     }
+    public int get(int row, int col){
+        return values[row][col];
+    }
 
     public int[] getCol(int col){
         return IntStream.range(0, size)
@@ -71,6 +74,16 @@ public class RubikSide {
         setRow(size-1, reverse(col2));
         setCol(0, row2);
         setCol(size-1, row1);
+    }
+    @Override
+    public Object clone(){
+        RubikSide newSide = new RubikSide(this.size, 0);
+        for(int i = 0; i < this.values.length; i++){
+            for(int j = 0; j < this.values[i].length; j++){
+                newSide.values[i][j] = this.values[i][j];
+            }
+        }
+        return newSide;
     }
 
 
