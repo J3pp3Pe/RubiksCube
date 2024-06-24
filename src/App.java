@@ -11,7 +11,7 @@ public class App {
         
 
         cube1.printCube();
-        cube1.turnRowCW(0);
+        cube1.turnColumnACW(0);
         System.out.println();
         cube1.printCube();
     }
