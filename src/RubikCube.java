@@ -109,4 +109,22 @@ public class RubikCube {
 
         return result;
     }
+    public RubikSide getTop(){
+        return (RubikSide)this.top.clone();
+    }
+    public RubikSide getRight(){
+        return (RubikSide)this.right.clone();
+    }
+    public RubikSide getLeft(){
+        return (RubikSide)this.left.clone();
+    }
+    public RubikSide getBack(){
+        return (RubikSide)this.back.clone();
+    }
+      public RubikSide getFront(){
+        return (RubikSide)this.front.clone();
+    }
+      public RubikSide getBottom(){
+        return (RubikSide)this.bottom.clone();
+    }
 }
