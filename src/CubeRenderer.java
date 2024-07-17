@@ -71,7 +71,7 @@ public class CubeRenderer extends JPanel implements MouseMotionListener, MouseLi
 		int width = 0;
 		int height = 0;
 		try {
-			BufferedImage image = ImageIO.read(new File("res/cube.png"));
+			BufferedImage image = ImageIO.read(new File("../res/cube.png"));
 			width = image.getWidth();
 			height = image.getHeight();
 			rgb = new int[width * height];
@@ -476,7 +476,7 @@ public class CubeRenderer extends JPanel implements MouseMotionListener, MouseLi
 		int width;
 		int height;
 		try {
-			BufferedImage image = ImageIO.read(new File("res/cube.png"));
+			BufferedImage image = ImageIO.read(new File("../res/cube.png"));
 			width = image.getWidth();
 			height = image.getHeight();
 			rgb = new int[width * height];
