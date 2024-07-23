@@ -1,11 +1,6 @@
 
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -22,7 +17,7 @@ import rendering.Vector3;
 
 import rendering.Bajs.Move;
 
-public class CubeRenderer extends JPanel implements MouseMotionListener, MouseListener, KeyListener{
+public class CubeRenderer extends JPanel implements MouseMotionListener, MouseListener{
 	private final List<Triangle> triangles;
 	private final SmallCube[][][] cubes;
 	private Vector3 position;
@@ -39,14 +34,14 @@ public class CubeRenderer extends JPanel implements MouseMotionListener, MouseLi
 	
 	private int width, height;
 
-	public CubeRenderer(int width, int height, RubikCube cube){
+	public CubeRenderer(int width, int height){
 		this.width = width;
 		this.height = height;
 		triangles = new ArrayList<>(3 * 3 * 6 * 2);
 		cubes = new SmallCube[3][3][3];
 		
-		setCube(cube);	
-		removeInsides();
+		
+		//removeInsides();
 		moves = new LinkedList<>();
 		
 		position = new Vector3(0,0,-3.9f);
@@ -55,23 +50,18 @@ public class CubeRenderer extends JPanel implements MouseMotionListener, MouseLi
 
 		addMouseListener(this);
 		addMouseMotionListener(this);
-		addKeyListener(this);
 		setFocusable(true);
 	}
-	
-	public CubeRenderer(int width, int height) {
-		this(width, height, new RubikCube(3));
-		
-	}
+
 	public void queueMove(Move ... moves){
 		this.moves.addAll(Arrays.asList(moves));
 	}
-	public void setCube(RubikCube cube){
+	public void setCube(RubikSide left, RubikSide right, RubikSide top, RubikSide bottom, RubikSide back, RubikSide front){
 		int[] rgb = null;
 		int width = 0;
 		int height = 0;
 		try {
-			BufferedImage image = ImageIO.read(new File("../res/cube.png"));
+			BufferedImage image = ImageIO.read(new File("../res/colors.png"));
 			width = image.getWidth();
 			height = image.getHeight();
 			rgb = new int[width * height];
@@ -83,12 +73,6 @@ public class CubeRenderer extends JPanel implements MouseMotionListener, MouseLi
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		RubikSide left = cube.getLeft();
-		RubikSide right = cube.getRight();
-		RubikSide top = cube.getTop();
-		RubikSide bottom = cube.getBottom();
-		RubikSide back = cube.getBack();
-		RubikSide front = cube.getFront();
 
 		Triangle[][] colors = new Triangle[6][];
 		for(int i = 0; i < 6; i++){
@@ -622,59 +606,5 @@ public class CubeRenderer extends JPanel implements MouseMotionListener, MouseLi
 	public void mouseEntered(MouseEvent e) {}
 	@Override
 	public void mouseExited(MouseEvent e) {}
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyPressed(KeyEvent e) {
-		System.out.println("key");
-		switch(e.getKeyCode()) {
-			case KeyEvent.VK_J:
-				moves.add(Move.U);
-				break;
-			case KeyEvent.VK_K:
-				moves.add(Move.R_);
-				break;
-			case KeyEvent.VK_L:
-				moves.add(Move.D_);
-				break;
-			case KeyEvent.VK_I:
-				moves.add(Move.R);
-				break;
-			case KeyEvent.VK_F:
-				moves.add(Move.U_);
-				break;
-			case KeyEvent.VK_D:
-				moves.add(Move.L);
-				break;
-			case KeyEvent.VK_S:
-				moves.add(Move.D);
-				break;
-			case KeyEvent.VK_E:
-				moves.add(Move.L_);
-				break;
-			case KeyEvent.VK_H:
-				moves.add(Move.F);
-				break;
-			case KeyEvent.VK_G:
-				moves.add(Move.F_);
-				break;
-			case KeyEvent.VK_O:
-				moves.add(Move.B_);
-				break;
-			case KeyEvent.VK_W:
-				moves.add(Move.B);
-				break;
-			
-		}
-		
-	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 }
 

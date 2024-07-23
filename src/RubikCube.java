@@ -1,6 +1,9 @@
 import java.util.Arrays;
 
+import rendering.Bajs.Move;
+
 public class RubikCube {
+    public CubeRenderer renderer;
     private int size;
     private RubikSide top;
     private RubikSide right;
@@ -9,16 +12,21 @@ public class RubikCube {
     private RubikSide front;
     private RubikSide bottom;
 
-    public RubikCube (int size){
+    public RubikCube (int size, int width, int height){
         this.size = size;
         this.front = new RubikSide(size, 1);
         this.right = new RubikSide(size, 2);
         this.left = new RubikSide(size, 4);
         this.top = new RubikSide(size, 6);
         this.back = new RubikSide(size, 3);
-        this.bottom = new RubikSide(size, 5);
+        this.bottom = new RubikSide(size, 5);  
+        renderer = new CubeRenderer(width, height);    
+        renderer.setCube(left, right, top, bottom, back, front);
     }
 
+    public void move(Move ... moves){
+		this.renderer.queueMove(moves);
+	}
     public void turnRowACW(int row){
         int[] frontRow = front.getRow(row);
         front.setRow(row, left.getRow(row));
